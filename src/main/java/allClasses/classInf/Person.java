@@ -48,4 +48,14 @@ public class Person {
     public ZonedDateTime getBirthday() {
         return birthday;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "birthday=" + birthday +
+                ", weight=" + weight +
+                ", eyeColor=" + eyeColor +
+                ", nationality=" + nationality +
+                '}';
+    }
 }
