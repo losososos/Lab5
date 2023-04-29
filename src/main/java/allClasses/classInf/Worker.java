@@ -101,6 +101,7 @@ public class Worker {
     public String toString() {
         return "Worker{" +
                 "id=" + id +
+                ", person=" + person +
                 ", name='" + name + '\'' +
                 ", coordinates=" + coordinates +
                 ", creationDate=" + creationDate +
@@ -108,7 +109,6 @@ public class Worker {
                 ", startDate=" + startDate +
                 ", position=" + position +
                 ", status=" + status +
-                ", person=" + person +
                 '}';
     }
 }
