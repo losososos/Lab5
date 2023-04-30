@@ -1,14 +1,35 @@
 package allClasses.interaction.console;
 
+import allClasses.classInf.*;
+import allClasses.collection.Collection;
+
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ScannerInput {
+
+    public Worker addToCollection(){
+        Scanner scanner = new Scanner(System.in);
+        ScannerInput scannerInput = new ScannerInput();
+        String name  = scannerInput.nextString(scanner.nextLine());
+        Double salary = scannerInput.nextDouble(scannerInput.nextString(scanner.nextLine()));
+        Position position = EnumManager.positionChoose();
+        Status status = EnumManager.statusChoose();
+        LocalDateTime startDate = scannerInput.nextLocalDateTime(scannerInput.nextString(scanner.nextLine()));
+        ZonedDateTime birthday = ZonedDateTime.now()/*scannerInput.nextZonedDateTime(scannerInput.nextString(scanner.nextLine()))*/;
+        Color color = EnumManager.colorChoose();
+        Long weight = scannerInput.nextLong(scanner.nextLine());
+        Country country = EnumManager.countryChoose();
+        Double x = scannerInput.nextDouble(scannerInput.nextString(scanner.nextLine()));
+        Float y = scannerInput.nextFloat(scannerInput.nextString(scanner.nextLine()));
+        Worker worker = new Worker(name, salary, position, status, startDate, birthday, color, weight, country, x, y);
+        return worker;
+    }
+
     private final static Scanner scanner = new Scanner(System.in);
     public Long nextLong(String inputText) {
-        System.out.println("Введите число");
         Long value = null;
         boolean wasInput = false;
         while (!wasInput) {
@@ -22,7 +43,6 @@ public class ScannerInput {
     }
 
     public Double nextDouble(String inputText) {
-        System.out.println("Введите число");
         Double value = null;
         boolean wasInput = false;
         while (!wasInput) {
@@ -36,7 +56,6 @@ public class ScannerInput {
     }
 
     public Float nextFloat(String inputText) {
-        System.out.println("Введите число");
         Float value = null;
         boolean wasInput = false;
         while (!wasInput) {
@@ -64,7 +83,6 @@ public class ScannerInput {
     }
 
     public String nextString(String inputText) {
-        System.out.println("Введите строку");
         String value = null;
         boolean wasInput = false;
         while (!wasInput) {
@@ -81,7 +99,6 @@ public class ScannerInput {
         return value;
     }
     public LocalDateTime nextLocalDateTime(String inputText){
-        System.out.println("Введите дату (yyyy-MM-dd HH:mm)");
         boolean wasInput = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime value = null;
