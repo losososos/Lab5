@@ -6,13 +6,21 @@ import java.util.Scanner;
 
 public class  InputManager {
     private static final ScannerInput scannerInput = new ScannerInput();
-    private static final Scanner scanner = new Scanner(System.in);
+
+    protected static String declareCommand() {
+        String command = null;
+        while (command == null) {
+            System.out.println("Введите команду");
+            command = scannerInput.nextString();
+        }
+        return command;
+    }
 
     protected static String declareName() {
         String name = null;
         while (name == null) {
-            System.out.println("Имя>");
-            name = scannerInput.nextString(scanner.nextLine());
+            System.out.println("Имя");
+            name = scannerInput.nextString();
         }
         return name;
     }
@@ -20,8 +28,8 @@ public class  InputManager {
     protected static LocalDateTime declareStartDate() {
         LocalDateTime startDate = null;
         while (startDate == null) {
-            System.out.println("Дата (yyyy-MM-dd HH:mm)>");
-            startDate = scannerInput.nextLocalDateTime(scanner.nextLine());
+            System.out.println("Дата (yyyy-MM-dd HH:mm)");
+            startDate = scannerInput.nextLocalDateTime();
         }
         return startDate;
     }
@@ -38,8 +46,8 @@ public class  InputManager {
     protected static Double declareSalary() {
         Double salary = null;
         while (salary == null) {
-            System.out.println("Зарплата>");
-            salary = scannerInput.nextDouble(scanner.nextLine());
+            System.out.println("Зарплата");
+            salary = scannerInput.nextDouble();
         }
         return salary;
     }
@@ -47,8 +55,8 @@ public class  InputManager {
     protected static Long declareWeight() {
         Long weight = null;
         while (weight == null) {
-            System.out.println("Вес>");
-            weight = scannerInput.nextLong(scanner.nextLine());
+            System.out.println("Вес");
+            weight = scannerInput.nextLong();
         }
         return weight;
     }
@@ -56,8 +64,8 @@ public class  InputManager {
     protected static Double declareX() {
         Double x = null;
         while (x == null) {
-            System.out.println("Координата X>");
-            x = scannerInput.nextDouble(scanner.nextLine());
+            System.out.println("Координата X");
+            x = scannerInput.nextDouble();
         }
         return x;
     }
@@ -65,10 +73,37 @@ public class  InputManager {
     protected static Float declareY() {
         Float y = null;
         while (y == null) {
-            System.out.println("Координата Y>");
-            y = scannerInput.nextFloat(scanner.nextLine());
+            System.out.println("Координата Y");
+            y = scannerInput.nextFloat();
         }
         return y;
+    }
+
+    protected static int declareEnum(int amountOfOptions, String enumOption) {
+        Integer numEnum = 0;
+        while (numEnum == null | numEnum < 1 | numEnum > amountOfOptions) {
+            switch (enumOption) {
+                case ("color"):
+                    System.out.println("Выберите цвет");
+                    System.out.println("1 - Black, 2 - Green, 3 - White, 4 - Yellow");
+                    break;
+                case ("position"):
+                    System.out.println("Выберите позицию");
+                    System.out.println("1 - Cleaner, 2 - Cook, 3 - Engineer, 4 - Head of Division");
+                    break;
+                case ("country"):
+                    System.out.println("Выберите страну");
+                    System.out.println("1 - France, 2 - India, 3 - Italy, 4 - Vatican");
+                    break;
+                case ("status"):
+                    System.out.println("Выберите статус");
+                    System.out.println("1 - Fired, 2 - Regular, 3 - Recommended for promotion");
+                    break;
+            }
+            ;
+            numEnum = scannerInput.nextInt();
+        }
+        return numEnum;
     }
 }
 

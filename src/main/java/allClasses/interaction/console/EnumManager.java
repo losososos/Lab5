@@ -4,55 +4,104 @@ import allClasses.classInf.Color;
 import allClasses.classInf.Country;
 import allClasses.classInf.Position;
 import allClasses.classInf.Status;
-import allClasses.interaction.console.ConsoleInput;
-import allClasses.interaction.console.InputManager;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class EnumManager {
-    private final static Scanner enumScanner = new Scanner(System.in);
+    private static final ScannerInput enumScanner = new ScannerInput();
+
+
     public static Color colorChoose() {
-        System.out.println("Выберите цвет");
-        System.out.println("1 - Black, 2 - Green, 3 - White, 4 - Yellow");
-        return switch (enumScanner.nextInt()) {
-            case (1) -> Color.BLACK;
-            case (2) -> Color.GREEN;
-            case (3) -> Color.WHITE;
-            case (4) -> Color.YELLOW;
-            default -> null;
-        };
+        Color option = null;
+        while (option==null) {
+            switch (InputManager.declareEnum(4,"color")) {
+                case (1):
+                    option = Color.BLACK;
+                    break;
+                case (2):
+                    option = Color.GREEN;
+                    break;
+                case (3):
+                    option = Color.WHITE;
+                    break;
+                case (4):
+                    option = Color.YELLOW;
+                    break;
+                default:
+                    break;
+            }
+            ;
+        }
+        return option;
     }
 
     public static Country countryChoose() {
-        System.out.println("Выберите страну");
-        System.out.println("1 - France, 2 - India, 3 - Italy, 4 - Vatican");
-        return switch (enumScanner.nextInt()) {
-            case (1) -> Country.FRANCE;
-            case (2) -> Country.INDIA;
-            case (3) -> Country.ITALY;
-            case (4) -> Country.VATICAN;
-            default -> null;
-        };
+        Country option = null;
+        while (option == null) {
+            switch (InputManager.declareEnum(4,"country")) {
+                case (1):
+                    option = Country.FRANCE;
+                    break;
+                case (2):
+                    option = Country.INDIA;
+                    break;
+                case (3):
+                    option = Country.ITALY;
+                    break;
+                case (4):
+                    option = Country.VATICAN;
+                    break;
+                default:
+                    break;
+            }
+            ;
+        }
+        return option;
     }
+
     public static Position positionChoose() {
-        System.out.println("Выберите позицию");
-        System.out.println("1 - France, 2 - India, 3 - Italy, 4 - Vatican");
-        return switch (enumScanner.nextInt()) {
-            case (1) -> Position.CLEANER;
-            case (2) -> Position.COOK;
-            case (3) -> Position.ENGINEER;
-            case (4) -> Position.HEAD_OF_DIVISION;
-            default -> null;
-        };
+        Position option = null;
+        while (option == null) {
+            switch (InputManager.declareEnum(4,"position")) {
+                case (1):
+                    option = Position.CLEANER;
+                    break;
+                case (2):
+                    option = Position.COOK;
+                    break;
+                case (3):
+                    option = Position.ENGINEER;
+                    break;
+                case (4):
+                    option = Position.HEAD_OF_DIVISION;
+                    break;
+                default:
+                    break;
+            }
+            ;
+        }
+        return option;
     }
+
     public static Status statusChoose() {
-        System.out.println("Выберите статус");
-        System.out.println("1 - Fired, 2 - Regular, 3 - Recommended for promotion");
-        return switch (enumScanner.nextInt()) {
-            case (1) -> Status.FIRED;
-            case (2) -> Status.REGULAR;
-            case (3) -> Status.RECOMMENDED_FOR_PROMOTION;
-            default -> null;
-        };
+        Status option = null;
+        while (option == null) {
+            switch (InputManager.declareEnum(4,"status")) {
+                case (1):
+                    option = Status.FIRED;
+                    break;
+                case (2):
+                    option = Status.REGULAR;
+                    break;
+                case (3):
+                    option = Status.RECOMMENDED_FOR_PROMOTION;
+                    break;
+                default:
+                    break;
+            }
+            ;
+        }
+        return option;
     }
 }

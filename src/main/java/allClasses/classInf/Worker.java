@@ -25,11 +25,11 @@ public class Worker {
         this.coordinates = coordinates;
         id = java.util.UUID.randomUUID();
         this.creationDate = ZonedDateTime.now();
-        this.name = new InputManager(name, ObjCharacteristic.NOT_NULL).stringInput();
-        this.salary = new InputManager(salary, ObjCharacteristic.MORE_THAN_0).doubleInput();
-        this.position = (Position) new InputManager(position, ObjCharacteristic.NOT_NULL).objectInput();
-        this.status = (Status) new InputManager(status, ObjCharacteristic.NOT_NULL).objectInput();
-        this.startDate = new InputManager(startDate,ObjCharacteristic.NOT_NULL).localDateTimeInput();
+        this.name = name;
+        this.salary = salary;
+        this.position = position;
+        this.status = status;
+        this.startDate = startDate;
 
     }
 

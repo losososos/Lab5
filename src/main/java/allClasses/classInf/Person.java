@@ -12,7 +12,7 @@ public class Person {
 
     public Person(ZonedDateTime birthday, long weight, Color eyeColor, Country nationality){
         this.birthday = birthday;
-        this.weight = new InputManager(weight, ObjCharacteristic.MORE_THAN_0).longInput();
+        this.weight = weight;
         this.eyeColor = eyeColor;
         this.nationality = nationality;
     }
