@@ -6,13 +6,13 @@ import allClasses.collection.Collection;
 public class  Add extends AbstractCommand {
     @Override
     public String getInfo() {
-        return getName() + "\t\t\t\t\t\t\t\t\t\t\t-\tдобавить новый элемент в коллекцию";
+        return getName() + " \t-\tдобавить новый элемент в коллекцию";
     }
 
-    @Override
-    public String execute(Object inputData) {
-        if (inputData instanceof Worker worker) {
-            Collection.addWorker(worker);
+
+    public static String execute(Worker inputData) {
+        if (inputData != null) {
+            Collection.addWorker(inputData);
         }
         return "Выполнено";
     }

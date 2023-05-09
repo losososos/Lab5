@@ -16,10 +16,11 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.io.BufferedWriter;
 
 public class XmlManager {
 
-
+    
     private static Document document;
     private static Element workers;
 
