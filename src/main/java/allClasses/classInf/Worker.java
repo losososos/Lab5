@@ -7,7 +7,7 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class Worker {
-    private final UUID id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private UUID id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private Person person;
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -18,12 +18,12 @@ public class Worker {
     private Status status; //Поле может быть null
     //private Person person; //Поле не может быть null
 
-    public Worker(String name, double salary, Position position, Status status, LocalDateTime startDate, ZonedDateTime birthday,  Color eyeColor,long weight, Country nationality, Double x, Float y) {
+    public Worker(String name, double salary, Position position, Status status, LocalDateTime startDate, ZonedDateTime birthday, Color eyeColor, long weight, Country nationality, Double x, Float y) {
         Person person = new Person(birthday, weight, eyeColor, nationality);
         Coordinates coordinates = new Coordinates(x, y);
         this.person = person;
         this.coordinates = coordinates;
-        id = java.util.UUID.randomUUID();
+        this.id = java.util.UUID.randomUUID();
         this.creationDate = ZonedDateTime.now();
         this.name = name;
         this.salary = salary;
@@ -85,6 +85,14 @@ public class Worker {
         this.position = position;
     }
 
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public void setSalary(double salary) {
         this.salary = salary;
     }
@@ -99,16 +107,17 @@ public class Worker {
 
     @Override
     public String toString() {
-        return "Worker{" +
-                "id=" + id +
-                ", person=" + person +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
-                ", creationDate=" + creationDate +
-                ", salary=" + salary +
-                ", startDate=" + startDate +
-                ", position=" + position +
-                ", status=" + status +
+        return "Worker" + "\n"+
+                "{" + "\n"+
+                "\tid=" + id + "\n" +
+                "\t" + person + "\n" +
+                "\tname='" + name + "\'\n" +
+                "\t" + coordinates + "\n" +
+                "\tcreationDate=" + creationDate + "\n" +
+                "\tsalary=" + salary + "\n" +
+                "\tstartDate=" + startDate + "\n" +
+                "\tposition=" + position + "\n" +
+                "\tstatus=" + status + "\n" +
                 '}';
     }
 }

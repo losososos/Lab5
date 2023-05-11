@@ -51,11 +51,12 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "birthday=" + birthday +
-                ", weight=" + weight +
-                ", eyeColor=" + eyeColor +
-                ", nationality=" + nationality +
-                '}';
+        return "Person" +
+                "\t{" + "\n"+
+                "\t\tbirthday=" + birthday + "\n"+
+                "\t\tweight=" + weight + "\n"+
+                "\t\teyeColor=" + eyeColor + "\n"+
+                "\t\tnationality=" + nationality + "\n"+
+                "\t}";
     }
 }

@@ -1,19 +1,13 @@
 package allClasses.classInf;
 
 public enum Position {
-    ENGINEER("Engineer"),
-    HEAD_OF_DIVISION("Head of division"),
-    COOK("Cook"),
-    CLEANER("Cleaner");
-
-    private final String position;
-
-    Position(String profession) {
-        this.position = profession;
-    }
+    ENGINEER,
+    HEAD_OF_DIVISION,
+    COOK,
+    CLEANER;
 
     @Override
-    public String toString() {
-        return position;
+    public String toString(){
+        return this.name();
     }
 }
