@@ -6,7 +6,7 @@ import interfaces.Executable;
 public class Info extends AbstractCommand {
     @Override
     public String getInfo() {
-        return getName() + "\t-\tдобавить новый элемент в коллекцию";
+        return "\t" + getName() + "\t-\tдобавить новый элемент в коллекцию";
     }
 
 

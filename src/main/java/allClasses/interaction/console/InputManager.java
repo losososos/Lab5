@@ -10,16 +10,16 @@ public class  InputManager {
     protected static String declareCommand() {
         String command = null;
         while (command == null) {
-            System.out.println("Введите команду");
+            System.out.println("<Введите команду>");
             command = scannerInput.nextString();
         }
         return command;
     }
 
-    protected static String declareName() {
+    public static String declareName() {
         String name = null;
         while (name == null) {
-            System.out.println("Имя");
+            System.out.println("<Имя>");
             name = scannerInput.nextString();
         }
         return name;
@@ -28,7 +28,7 @@ public class  InputManager {
     protected static LocalDateTime declareStartDate() {
         LocalDateTime startDate = null;
         while (startDate == null) {
-            System.out.println("Дата (yyyy-MM-dd HH:mm)");
+            System.out.println("<Дата (yyyy-MM-dd HH:mm)>");
             startDate = scannerInput.nextLocalDateTime();
         }
         return startDate;
@@ -46,7 +46,7 @@ public class  InputManager {
     protected static Double declareSalary() {
         Double salary = null;
         while (salary == null) {
-            System.out.println("Зарплата");
+            System.out.println("<Зарплата>");
             salary = scannerInput.nextDouble();
         }
         return salary;
@@ -55,7 +55,7 @@ public class  InputManager {
     protected static Long declareWeight() {
         Long weight = null;
         while (weight == null) {
-            System.out.println("Вес");
+            System.out.println("<Вес>");
             weight = scannerInput.nextLong();
         }
         return weight;
@@ -64,7 +64,7 @@ public class  InputManager {
     protected static Double declareX() {
         Double x = null;
         while (x == null) {
-            System.out.println("Координата X");
+            System.out.println("<Координата X>");
             x = scannerInput.nextDouble();
         }
         return x;
@@ -73,7 +73,7 @@ public class  InputManager {
     protected static Float declareY() {
         Float y = null;
         while (y == null) {
-            System.out.println("Координата Y");
+            System.out.println("<Координата Y>");
             y = scannerInput.nextFloat();
         }
         return y;
@@ -84,20 +84,20 @@ public class  InputManager {
         while (numEnum == null | numEnum < 1 | numEnum > amountOfOptions) {
             switch (enumOption) {
                 case ("color"):
-                    System.out.println("Выберите цвет");
-                    System.out.println("1 - Black, 2 - Green, 3 - White, 4 - Yellow");
+                    System.out.println("<Выберите цвет>");
+                    System.out.println("(1 - Black, 2 - Green, 3 - White, 4 - Yellow)");
                     break;
                 case ("position"):
-                    System.out.println("Выберите позицию");
-                    System.out.println("1 - Cleaner, 2 - Cook, 3 - Engineer, 4 - Head of Division");
+                    System.out.println("<Выберите позицию>");
+                    System.out.println("(1 - Cleaner, 2 - Cook, 3 - Engineer, 4 - Head of Division)");
                     break;
                 case ("country"):
-                    System.out.println("Выберите страну");
-                    System.out.println("1 - France, 2 - India, 3 - Italy, 4 - Vatican");
+                    System.out.println("<Выберите страну>");
+                    System.out.println("(1 - France, 2 - India, 3 - Italy, 4 - Vatican)");
                     break;
                 case ("status"):
-                    System.out.println("Выберите статус");
-                    System.out.println("1 - Fired, 2 - Regular, 3 - Recommended for promotion");
+                    System.out.println("<Выберите статус>");
+                    System.out.println("(1 - Fired, 2 - Regular, 3 - Recommended for promotion)");
                     break;
             }
             ;
