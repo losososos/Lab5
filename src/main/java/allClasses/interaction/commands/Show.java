@@ -4,6 +4,7 @@ package allClasses.interaction.commands;
 import allClasses.classInf.Worker;
 import allClasses.collection.Collection;
 import allClasses.data.XmlManager;
+import allClasses.interaction.console.CommandCaller;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -29,6 +30,7 @@ public class  Show extends AbstractCommand {
         }else{
             System.out.println("Коллекция пуста");
         }
+        Show show = new Show();
+        CommandCaller.history.add(show.getName());
     }
-
 }

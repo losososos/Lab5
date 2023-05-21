@@ -1,11 +1,6 @@
 package allClasses.interaction.commands;
 
-import interfaces.Informationable;
-import org.reflections.Reflections;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.Set;
-
+import allClasses.interaction.console.CommandCaller;
 public class Help extends AbstractCommand {
     @Override
     public String getInfo() {
@@ -30,5 +25,6 @@ public class Help extends AbstractCommand {
                 + save.getInfo() + "\n"
                 + filterStartsWithName.getInfo() + "\n"
                 + exit.getInfo());
+        CommandCaller.history.add(help.getName());
     }
 }

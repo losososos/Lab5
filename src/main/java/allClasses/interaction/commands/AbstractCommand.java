@@ -1,6 +1,7 @@
 package allClasses.interaction.commands;
 
 import allClasses.classInf.Worker;
+import allClasses.interaction.console.CommandCaller;
 import interfaces.Executable;
 import interfaces.Informationable;
 import interfaces.Nameble;

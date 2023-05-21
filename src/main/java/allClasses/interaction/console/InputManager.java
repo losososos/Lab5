@@ -83,22 +83,22 @@ public class  InputManager {
         Integer numEnum = 0;
         while (numEnum == null | numEnum < 1 | numEnum > amountOfOptions) {
             switch (enumOption) {
-                case ("color"):
+                case ("color") -> {
                     System.out.println("<Выберите цвет>");
                     System.out.println("(1 - Black, 2 - Green, 3 - White, 4 - Yellow)");
-                    break;
-                case ("position"):
+                }
+                case ("position") -> {
                     System.out.println("<Выберите позицию>");
                     System.out.println("(1 - Cleaner, 2 - Cook, 3 - Engineer, 4 - Head of Division)");
-                    break;
-                case ("country"):
+                }
+                case ("country") -> {
                     System.out.println("<Выберите страну>");
                     System.out.println("(1 - France, 2 - India, 3 - Italy, 4 - Vatican)");
-                    break;
-                case ("status"):
+                }
+                case ("status") -> {
                     System.out.println("<Выберите статус>");
                     System.out.println("(1 - Fired, 2 - Regular, 3 - Recommended for promotion)");
-                    break;
+                }
             }
             ;
             numEnum = scannerInput.nextInt();
@@ -106,27 +106,3 @@ public class  InputManager {
         return numEnum;
     }
 }
-
-//    private Object value;
-//    private ObjCharacteristic[] characteristics;
-//
-//        public InputManager(Object value, ObjCharacteristic... characteristics){
-//        this.characteristics = characteristics;
-//        this.value = value;
-//    }
-//    public Long longInput(){
-//        return (Long) value;
-//    }
-//    public int intInput(){return (int) value;}
-//    public String stringInput() {
-//        return (String) value;
-//    }
-//    public Object objectInput(){return (Object) value;}
-//    public Double doubleInput(){return (Double) value;}
-//    public LocalDateTime localDateTimeInput(){return (LocalDateTime) value;}
-//    public static LocalDateTime dateInput(String userInput) {
-//        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("M/d/yyyy");
-//        LocalDateTime date = LocalDateTime.parse(userInput, dateFormat);
-//        return date;
-//    }
-

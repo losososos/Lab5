@@ -3,6 +3,7 @@ package allClasses.interaction.commands;
 import allClasses.classInf.Worker;
 import allClasses.collection.Collection;
 import allClasses.data.XmlManager;
+import allClasses.interaction.console.CommandCaller;
 import allClasses.interaction.console.InputManager;
 import org.xml.sax.SAXException;
 
@@ -30,6 +31,8 @@ public class  FilterStartsWithName extends AbstractCommand {
         }else{
             System.out.println("Коллекция пуста");
         }
+        FilterStartsWithName filterStartsWithName = new FilterStartsWithName();
+        CommandCaller.history.add(filterStartsWithName.getName());
     }
 
 }

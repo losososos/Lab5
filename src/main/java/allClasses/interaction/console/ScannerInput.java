@@ -33,7 +33,7 @@ public class ScannerInput {
 
     public Long nextLong() {
         Long value = null;
-        String inputText = scanner.nextLine();
+        String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
         while (!wasInput) {
             if (!inputText.isBlank())
@@ -45,7 +45,7 @@ public class ScannerInput {
 
     public Double nextDouble() {
         Double value = null;
-        String inputText = scanner.nextLine();
+        String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
         while (!wasInput) {
                 if (!inputText.isBlank())
@@ -57,7 +57,7 @@ public class ScannerInput {
 
     public Float nextFloat() {
         Float value = null;
-        String inputText = scanner.nextLine();
+        String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
         while (!wasInput) {
                 if (!inputText.isBlank())
@@ -69,7 +69,7 @@ public class ScannerInput {
 
     public Integer nextInt() {
         Integer value = null;
-        String inputText = scanner.nextLine();
+        String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
         while (!wasInput) {
             if (!inputText.isBlank())
@@ -81,7 +81,7 @@ public class ScannerInput {
 
     public String nextString() {
         String value = null;
-        String inputText = scanner.nextLine();
+        String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
         while (!wasInput) {
             if (!inputText.isBlank()){
@@ -95,7 +95,7 @@ public class ScannerInput {
     }
     public LocalDateTime nextLocalDateTime(){
         boolean wasInput = false;
-        String inputText = scanner.nextLine();
+        String inputText = scanner.nextLine().trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime value = null;
         while (!wasInput) {

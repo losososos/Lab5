@@ -10,11 +10,15 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.Objects;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class CommandCaller {
-//    private final Scanner scanner = new Scanner(System.in);
+
+    public static final ArrayDeque<String> history = new ArrayDeque<>(15);
+
     public static void commandCaller() throws IOException, TransformerException, XMLStreamException, ParserConfigurationException, SAXException {
         String command = InputManager.declareCommand();
         while (!Objects.equals(command, "exit")) {
@@ -39,6 +43,10 @@ public class CommandCaller {
                     break;
                 case ("filestartswithname"):
                     FilterStartsWithName.execute();
+                case ("history"):
+                    History.execute();
+                case ("removebyid"):
+                    RemoveById.execute();
                 default:
                     break;
             }

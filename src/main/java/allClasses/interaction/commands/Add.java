@@ -2,6 +2,7 @@ package allClasses.interaction.commands;
 
 import allClasses.classInf.Worker;
 import allClasses.collection.Collection;
+import allClasses.interaction.console.CommandCaller;
 
 public class  Add extends AbstractCommand {
     @Override
@@ -9,19 +10,12 @@ public class  Add extends AbstractCommand {
         return "\t" + getName() + " \t-\tдобавить новый элемент в коллекцию";
     }
 
-
-    public static String execute(Worker inputData) {
+    public static void execute(Worker inputData) {
         if (inputData != null) {
             Collection.addWorker(inputData);
         }
-        return "Выполнено";
+        Add add = new Add();
+        CommandCaller.history.add(add.getName());
     }
 
-    public boolean isNeedInput() {
-        return true;
-    }
-
-    public boolean hasTransferData() {
-        return true;
-    }
 }
