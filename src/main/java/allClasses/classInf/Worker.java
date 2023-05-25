@@ -1,39 +1,40 @@
 package allClasses.classInf;
 
-import allClasses.interaction.console.InputManager;
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
+
+import static java.lang.Math.abs;
 
 public class Worker {
-    private final UUID id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private Person person;
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
     private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private double salary; //Значение поля должно быть больше 0
     private java.time.LocalDateTime startDate; //Поле не может быть null
+    private java.time.LocalDate birthday; //Поле не может быть null
     private Position position; //Поле может быть null
     private Status status; //Поле может быть null
     //private Person person; //Поле не может быть null
 
-    public Worker(String name, double salary, Position position, Status status, LocalDateTime startDate, ZonedDateTime birthday,  Color eyeColor,long weight, Country nationality, Double x, Float y) {
+    public Worker(String name, double salary, Position position, Status status, LocalDateTime startDate, LocalDate birthday, Color eyeColor, long weight, Country nationality, Double x, Float y) {
         Person person = new Person(birthday, weight, eyeColor, nationality);
         Coordinates coordinates = new Coordinates(x, y);
         this.person = person;
         this.coordinates = coordinates;
-        id = java.util.UUID.randomUUID();
-        this.creationDate = ZonedDateTime.now();
-        this.name = new InputManager(name, ObjCharacteristic.NOT_NULL).stringInput();
-        this.salary = new InputManager(salary, ObjCharacteristic.MORE_THAN_0).doubleInput();
-        this.position = (Position) new InputManager(position, ObjCharacteristic.NOT_NULL).objectInput();
-        this.status = (Status) new InputManager(status, ObjCharacteristic.NOT_NULL).objectInput();
-        this.startDate = new InputManager(startDate,ObjCharacteristic.NOT_NULL).localDateTimeInput();
-
+        this.id = Math.abs(java.util.UUID.randomUUID().getMostSignificantBits());
+        this.creationDate = ZonedDateTime.parse(ZonedDateTime.now().format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
+        this.name = name;
+        this.salary = salary;
+        this.position = position;
+        this.status = status;
+        this.startDate = startDate;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
@@ -85,6 +86,14 @@ public class Worker {
         this.position = position;
     }
 
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public void setSalary(double salary) {
         this.salary = salary;
     }
@@ -99,16 +108,17 @@ public class Worker {
 
     @Override
     public String toString() {
-        return "Worker{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
-                ", creationDate=" + creationDate +
-                ", salary=" + salary +
-                ", startDate=" + startDate +
-                ", position=" + position +
-                ", status=" + status +
-                ", person=" + person +
+        return "Worker" + "\n" +
+                "{" + "\n" +
+                "\tid=" + id + "\n" +
+                "\t" + person + "\n" +
+                "\tname='" + name + "\'\n" +
+                "\t" + coordinates + "\n" +
+                "\tcreationDate=" + creationDate + "\n" +
+                "\tsalary=" + salary + "\n" +
+                "\tstartDate=" + startDate + "\n" +
+                "\tposition=" + position + "\n" +
+                "\tstatus=" + status + "\n" +
                 '}';
     }
 }

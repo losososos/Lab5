@@ -1,23 +1,22 @@
 package allClasses.classInf;
 
-import allClasses.interaction.console.InputManager;
-
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Person {
-    private java.time.ZonedDateTime birthday; //Поле не может быть null
+    private LocalDate birthday; //Поле не может быть null
     private long weight; //Значение поля должно быть больше 0
     private Color eyeColor; //Поле не может быть null
     private Country nationality; //Поле может быть null
 
-    public Person(ZonedDateTime birthday, long weight, Color eyeColor, Country nationality){
+    public Person(LocalDate birthday, long weight, Color eyeColor, Country nationality){
         this.birthday = birthday;
-        this.weight = new InputManager(weight, ObjCharacteristic.MORE_THAN_0).longInput();
+        this.weight = weight;
         this.eyeColor = eyeColor;
         this.nationality = nationality;
     }
 
-    public void setBirthday(ZonedDateTime birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -45,17 +44,18 @@ public class Person {
         return weight;
     }
 
-    public ZonedDateTime getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
     @Override
     public String toString() {
-        return "Person{" +
-                "birthday=" + birthday +
-                ", weight=" + weight +
-                ", eyeColor=" + eyeColor +
-                ", nationality=" + nationality +
-                '}';
+        return "Person" +
+                "\t{" + "\n"+
+                "\t\tbirthday=" + birthday + "\n"+
+                "\t\tweight=" + weight + "\n"+
+                "\t\teyeColor=" + eyeColor + "\n"+
+                "\t\tnationality=" + nationality + "\n"+
+                "\t}";
     }
 }

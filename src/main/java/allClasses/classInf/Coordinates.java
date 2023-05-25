@@ -17,11 +17,20 @@ public class Coordinates {
         return y;
     }
 
+    public void setX(Double x) {
+        this.x = x;
+    }
+
+    public void setY(Float y) {
+        this.y = y;
+    }
+
     @Override
     public String toString() {
-        return "Coordinates{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "Coordinates" + "\n"+
+                "\t{" + "\n"+
+                "\t\tx=" + x + "\n"+
+                "\t\ty=" + y + "\n"+
+                "\t}";
     }
 }

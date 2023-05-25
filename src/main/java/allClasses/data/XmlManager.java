@@ -1,46 +1,62 @@
 package allClasses.data;
 
-import allClasses.classInf.Coordinates;
-import allClasses.classInf.Person;
-import allClasses.classInf.Worker;
-import allClasses.classInf.Workers;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Text;
+import allClasses.classInf.*;
+import exceptions.NoFileException;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.LinkedHashSet;
+
+import static allClasses.collection.Collection.collection;
+
 
 public class XmlManager {
+    private static final File xmlFile = new File("data.xml");
+    public static Document document;
+    private static Element workersIn;
 
-
-    private static Document document;
-    private static Element workers;
-
-    public static void DeclareXml() {
+    public static void saveDeclareXml() throws TransformerException, FileNotFoundException {
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             document = dBuilder.newDocument();
-            workers = document.createElement("workers");
-            document.appendChild(workers);
+            workersIn = document.createElement("workers");
+            document.appendChild(workersIn);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Worker[] workerArray = collection.toArray(new Worker[collection.size()]);
+        for (Worker worker : workerArray) {
+            saveWorker(worker, document);
+        }
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.transform(new DOMSource(document), new StreamResult(new FileOutputStream("data.xml")));
+        DOMSource source = new DOMSource(document);
+        StreamResult file = new StreamResult(new File("data.xml"));
+        transformer.transform(source, file);
     }
 
-    public static void SaveWorker(Worker worker) throws FileNotFoundException, TransformerException {
+    public static void saveWorker(Worker worker, Document document) throws FileNotFoundException, TransformerException {
         Element workerIn = document.createElement("worker");
-        workers.appendChild(workerIn);
+        workersIn.appendChild(workerIn);
         Element id = document.createElement("id");
         workerIn.appendChild(id);
-        Text idText = document.createTextNode(worker.getId().toString());
+        Text idText = document.createTextNode(String.valueOf(worker.getId()));
         id.appendChild(idText);
 
         Element name = document.createElement("name");
@@ -106,14 +122,52 @@ public class XmlManager {
         Text nationalityText = document.createTextNode(String.valueOf(worker.getPerson().getNationality()));
         nationality.appendChild(nationalityText);
 
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.transform(new DOMSource(document), new StreamResult(new FileOutputStream("data.xml")));
     }
-    public static String readEmptyXMLCollection() throws IOException {
-        return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<movies>\n" +
-                "\n" +
-                "</movies>";
+
+    public static void readWorker() throws IOException, SAXException, ParserConfigurationException, TransformerException {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(xmlFile);
+
+            doc.getDocumentElement().normalize();
+            NodeList workerNodes = doc.getElementsByTagName("worker");
+            LinkedHashSet<Worker> workers = new LinkedHashSet<>();
+
+            for (int i = 0; i < workerNodes.getLength(); i++) {
+                Node workerNode = workerNodes.item(i);
+                if (workerNode.getNodeType() == Node.ELEMENT_NODE) {
+//                    try {
+                        Element workerElement = (Element) workerNode;
+                        long id = Long.parseLong(workerElement.getElementsByTagName("id").item(0).getTextContent());
+                        String name = workerElement.getElementsByTagName("name").item(0).getTextContent();
+                        double salary = Double.parseDouble(workerElement.getElementsByTagName("salary").item(0).getTextContent());
+                        LocalDateTime startDate = LocalDateTime.parse(workerElement.getElementsByTagName("startDate").item(0).getTextContent(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+                        Position position = Position.valueOf(workerElement.getElementsByTagName("position").item(0).getTextContent());
+                        Status status = Status.valueOf(workerElement.getElementsByTagName("status").item(0).getTextContent());
+                        Double x = Double.parseDouble(workerElement.getElementsByTagName("x").item(0).getTextContent());
+                        Float y = Float.parseFloat(workerElement.getElementsByTagName("y").item(0).getTextContent());
+                        ZonedDateTime creationDate = ZonedDateTime.parse(workerElement.getElementsByTagName("creationDate").item(0).getTextContent(), DateTimeFormatter.ISO_ZONED_DATE_TIME);
+                        LocalDate birthday = LocalDate.parse(workerElement.getElementsByTagName("birthday").item(0).getTextContent(), DateTimeFormatter.ISO_LOCAL_DATE);
+                        long weight = Long.parseLong(workerElement.getElementsByTagName("weight").item(0).getTextContent());
+                        Color eyeColor = Color.valueOf(workerElement.getElementsByTagName("eyeColor").item(0).getTextContent());
+                        Country nationality = Country.valueOf(workerElement.getElementsByTagName("nationality").item(0).getTextContent());
+
+                        Worker worker = new Worker(name, salary, position, status, startDate, birthday, eyeColor, weight, nationality, x, y);
+                        worker.setId(id);
+                        worker.setCreationDate(creationDate);
+                        workers.add(worker);
+//                    }catch (DateTimeParseException e){
+//
+//                    }
+                }
+            }
+            System.out.println("\tФайл прочитан");
+            collection.addAll(workers);
+        } catch (FileNotFoundException e) {
+            new NoFileException().printMessage();
+            saveDeclareXml();
+            System.out.println("\tФайл создан");
+        }
     }
 }

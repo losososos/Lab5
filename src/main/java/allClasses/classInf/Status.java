@@ -1,18 +1,11 @@
 package allClasses.classInf;
 
 public enum Status {
-    FIRED("Fired"),
-    RECOMMENDED_FOR_PROMOTION("Recommended for promotion"),
-    REGULAR("Regular");
+    FIRED,
+    RECOMMENDED_FOR_PROMOTION,
+    REGULAR;
 
-    private final String status;
-
-    Status(String status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return status;
+    public String toString(){
+        return this.name();
     }
 }
