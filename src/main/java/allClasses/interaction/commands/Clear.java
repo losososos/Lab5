@@ -10,8 +10,9 @@ public class Clear extends AbstractCommand {
     }
     public static void execute() {
         Collection.clear();
-        System.out.println("\tКоллекция был очищена");
+        System.out.println("\tКоллекция была очищена");
         Clear clear = new Clear();
         CommandCaller.history.add(clear.getName());
+        CommandCaller.executed = true;
     }
 }

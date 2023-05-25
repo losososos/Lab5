@@ -6,9 +6,7 @@ public class  Exit extends AbstractCommand {
         return "\t" + getName() + "\t-\tзавершить программу";
     }
 
-    public String execute() {
-        System.out.println("Завершение работы...");
+    public static void execute() {
         Runtime.getRuntime().exit(0);
-        return "Выполнено";
     }
 }

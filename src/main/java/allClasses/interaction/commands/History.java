@@ -9,10 +9,14 @@ public class History extends AbstractCommand {
     }
 
     public static void execute() {
-        for(String command: CommandCaller.history){
-            System.out.println(command);
+        if (CommandCaller.history.size() == 0) {
+            System.out.println("\tИстория введенных команд пуста");
+        } else {
+            System.out.println("История введенных команд");
+            CommandCaller.history.forEach(System.out::println);
         }
         History history = new History();
         CommandCaller.history.add(history.getName());
+        CommandCaller.executed = true;
     }
 }

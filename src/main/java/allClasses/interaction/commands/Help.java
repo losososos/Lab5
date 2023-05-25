@@ -15,7 +15,16 @@ public class Help extends AbstractCommand {
         Exit exit = new Exit();
         Help help = new Help();
         Save save = new Save();
+        AddIfMin addIfMin = new AddIfMin();
+        ExecuteScript executeScript = new ExecuteScript();
         FilterStartsWithName filterStartsWithName = new FilterStartsWithName();
+        History history = new History();
+        MaxByPosition maxByPosition = new MaxByPosition();
+        MinByStartDate minByStartDate = new MinByStartDate();
+        RemoveLower removeLower = new RemoveLower();
+        RemoveById removeById = new RemoveById();
+        Update update = new Update();
+
         System.out.println("Команды:\n"
                 + add.getInfo() + "\n"
                 + show.getInfo() + "\n"
@@ -24,7 +33,16 @@ public class Help extends AbstractCommand {
                 + help.getInfo() + "\n"
                 + save.getInfo() + "\n"
                 + filterStartsWithName.getInfo() + "\n"
+                + addIfMin.getInfo() + "\n"
+                + executeScript.getInfo() + "\n"
+                + history.getInfo() + "\n"
+                + maxByPosition.getInfo() + "\n"
+                + minByStartDate.getInfo() + "\n"
+                + removeLower.getInfo() + "\n"
+                + removeById.getInfo()+ "\n"
+                + update.getInfo()+ "\n"
                 + exit.getInfo());
         CommandCaller.history.add(help.getName());
+        CommandCaller.executed = true;
     }
 }

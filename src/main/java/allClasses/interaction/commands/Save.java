@@ -4,6 +4,7 @@ import allClasses.classInf.*;
 import allClasses.collection.Collection;
 import allClasses.data.XmlManager;
 import allClasses.interaction.console.CommandCaller;
+import exceptions.NullDocumentException;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,22 +31,20 @@ public class Save extends AbstractCommand {
         String path = "data.xml";
         File file = new File(path);
         if (collection.size() != 0) {
-            if (file.exists() && !file.isDirectory()) {
+//            if (file.exists() && !file.isDirectory()) {
+//                System.out.println("Файл найден");
+                XmlManager.saveDeclareXml();
                 System.out.println("\tСохранение коллекции");
-            } else {
-                System.out.println("\tФайла не существует, создаю файл");
-                XmlManager.DeclareXml();
-                System.out.println("\tФайл создан");
-                System.out.println("\tСохранение коллекции");
-            }
-            Worker[] workerArray = collection.toArray(new Worker[collection.size()]);
-            for (Worker worker : workerArray) {
-                XmlManager.saveWorker(worker);
-            }
-            }else{
-                System.out.println("\tКоллекция пуста");
-            }
+//            } else {
+//                System.out.println("\tФайла не существует, создаю файл");
+//                XmlManager.saveDeclareXml();
+//                System.out.println("\tСохранение коллекции");
+//            }
+        }else{
+            System.out.println("\tКоллекция пуста");
+        }
         Save save = new Save();
         CommandCaller.history.add(save.getName());
-        }
+        CommandCaller.executed = true;
     }
+}

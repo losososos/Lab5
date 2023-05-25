@@ -11,21 +11,24 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.LinkedHashSet;
 
+import static allClasses.collection.Collection.collection;
+
+//import static allClasses.data.XmlManager.workersXml;
+
 public class  FilterStartsWithName extends AbstractCommand {
     @Override
     public String getInfo() {
-        return "\t" + getName() + "\t-\tвывести элементы, значение поля name которых начинается с заданной подстроки";
+        return "\t" + getName() + " name\t-\tвывести элементы, значение поля name которых начинается с заданной подстроки";
     }
 
-    public static void execute() throws IOException, ParserConfigurationException, SAXException {
-        LinkedHashSet<Worker> workersXml = XmlManager.readWorker();
-        LinkedHashSet<Worker> workers = Collection.getCollection();
-        workers.addAll(workersXml);
-        String nameBegin = InputManager.declareName();
-        if (workers.size() != 0){
+    public static boolean execute(String nameBegin, Boolean script) throws IOException, ParserConfigurationException, SAXException {
+        if(nameBegin == null & !script) {
+            nameBegin = InputManager.declareString();
+        }
+        if (collection.size() != 0){
             System.out.println("Подходящие элементы коллекции:");
-            for (Worker worker : workers)
-                if (worker.getName().contains(nameBegin)) {
+            for (Worker worker : collection)
+                if (worker.getName().startsWith(nameBegin)) {
                     System.out.println("\t" + worker);
                 }
         }else{
@@ -33,6 +36,8 @@ public class  FilterStartsWithName extends AbstractCommand {
         }
         FilterStartsWithName filterStartsWithName = new FilterStartsWithName();
         CommandCaller.history.add(filterStartsWithName.getName());
+        CommandCaller.executed = true;
+        return true;
     }
 
 }
