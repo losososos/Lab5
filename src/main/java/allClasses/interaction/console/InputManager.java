@@ -1,17 +1,23 @@
 package allClasses.interaction.console;
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.Scanner;
+import exceptions.WarningException;
 
-public class  InputManager {
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import static allClasses.interaction.console.CommandCaller.executed;
+
+public class InputManager {
     private static final ScannerInput scannerInput = new ScannerInput();
 
-    protected static String declareCommand() {
+    public static String declareCommand() {
         String command = null;
         while (command == null) {
             System.out.println("<Введите команду>");
             command = scannerInput.nextString();
+            if (!executed) {
+                new WarningException("Неизвестная команда, help - для помощи").printMessage();
+            }
         }
         return command;
     }
@@ -25,25 +31,34 @@ public class  InputManager {
         return name;
     }
 
+    public static String declareString() {
+        String string = null;
+        while (string == null) {
+            System.out.println("<Строка>");
+            string = scannerInput.nextString();
+        }
+        return string;
+    }
+
     protected static LocalDateTime declareStartDate() {
         LocalDateTime startDate = null;
         while (startDate == null) {
-            System.out.println("<Дата (yyyy-MM-dd HH:mm)>");
+            System.out.println("<Дата начала (yyyy-MM-dd HH:mm)>");
             startDate = scannerInput.nextLocalDateTime();
         }
         return startDate;
     }
-    protected static ZonedDateTime declareBirthday() {
-        ZonedDateTime birthday = null;
-//        while (birthday == null) {
-//            System.out.println("Дата (yyyy-MM-dd HH:mm:ss VV)>");
-//            birthday = scannerInput.nextZonedDateTime(scanner.nextLine());
-//        }
-        birthday = ZonedDateTime.now();
+
+    protected static LocalDate declareBirthday() {
+        LocalDate birthday = null;
+        while (birthday == null) {
+            System.out.println("<Дата рождения (yyyy-MM-dd)>");
+            birthday = scannerInput.nextLocalDate();
+        }
         return birthday;
     }
 
-    protected static Double declareSalary() {
+    public static Double declareSalary() {
         Double salary = null;
         while (salary == null) {
             System.out.println("<Зарплата>");
@@ -52,7 +67,7 @@ public class  InputManager {
         return salary;
     }
 
-    protected static Long declareWeight() {
+    public static Long declareWeight() {
         Long weight = null;
         while (weight == null) {
             System.out.println("<Вес>");
@@ -70,6 +85,15 @@ public class  InputManager {
         return x;
     }
 
+    public static Long declareId() {
+        Long id = null;
+        while (id == null) {
+            System.out.println("<Id>");
+            id = scannerInput.nextLong();
+        }
+        return id;
+    }
+
     protected static Float declareY() {
         Float y = null;
         while (y == null) {
@@ -77,6 +101,15 @@ public class  InputManager {
             y = scannerInput.nextFloat();
         }
         return y;
+    }
+
+    public static String declareFile() {
+        String file = null;
+        while (file == null) {
+            System.out.println("<Имя файла>");
+            file = scannerInput.nextString();
+        }
+        return file;
     }
 
     protected static int declareEnum(int amountOfOptions, String enumOption) {

@@ -1,11 +1,12 @@
 package allClasses.interaction.console;
 
 import allClasses.classInf.*;
-import allClasses.collection.Collection;
+import exceptions.WarningException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class ScannerInput {
@@ -35,10 +36,14 @@ public class ScannerInput {
         Long value = null;
         String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
+        try {
         while (!wasInput) {
-            if (!inputText.isBlank())
-                value = Long.valueOf(inputText);
-            wasInput = true;
+                if (!inputText.isBlank())
+                    value = Long.valueOf(inputText);
+                wasInput = true;
+            }
+        } catch (NumberFormatException e) {
+            new WarningException("Ввод должен быть числом").printMessage();
         }
         return value;
     }
@@ -47,10 +52,14 @@ public class ScannerInput {
         Double value = null;
         String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
-        while (!wasInput) {
-                if (!inputText.isBlank())
-                    value = Double.valueOf(inputText);
-                wasInput = true;
+        try {
+            while (!wasInput) {
+                    if (!inputText.isBlank())
+                        value = Double.valueOf(inputText);
+                    wasInput = true;
+            }
+        } catch (NumberFormatException e) {
+            new WarningException("Ввод должен быть числом").printMessage();
         }
         return value;
     }
@@ -59,22 +68,30 @@ public class ScannerInput {
         Float value = null;
         String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
-        while (!wasInput) {
-                if (!inputText.isBlank())
-                    value = Float.valueOf(inputText);
-                wasInput = true;
+        try {
+            while (!wasInput) {
+                    if (!inputText.isBlank())
+                        value = Float.valueOf(inputText);
+                    wasInput = true;
+            }
+        } catch (NumberFormatException e) {
+            new WarningException("Ввод должен быть числом").printMessage();
         }
         return value;
     }
 
     public Integer nextInt() {
-        Integer value = null;
+        Integer value = 0;
         String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
-        while (!wasInput) {
-            if (!inputText.isBlank())
-                value = Integer.valueOf(inputText);
-            wasInput = true;
+        try {
+            while (!wasInput) {
+                    if (!inputText.isBlank() & inputText!=null)
+                        value = Integer.valueOf(inputText);
+                    wasInput = true;
+            }
+        }catch (NumberFormatException e){
+            new WarningException("Ввод должен быть числом").printMessage();
         }
         return value;
     }
@@ -84,12 +101,12 @@ public class ScannerInput {
         String inputText = scanner.nextLine().trim();
         boolean wasInput = false;
         while (!wasInput) {
-            if (!inputText.isBlank()){
-                value = inputText;
-                wasInput = true;
-            }else{
-                return null;
-            }
+                if (!inputText.isBlank()){
+                        value = inputText;
+                        wasInput = true;
+                }else{
+                    return null;
+                }
         }
         return value;
     }
@@ -98,26 +115,40 @@ public class ScannerInput {
         String inputText = scanner.nextLine().trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime value = null;
-        while (!wasInput) {
-            if (!inputText.isBlank())
-                value = LocalDateTime.parse(inputText, formatter);
-            wasInput = true;
+        try {
+            while (!wasInput) {
+                try {
+                    if (!inputText.isBlank())
+                        value = LocalDateTime.parse(inputText, formatter);
+                    wasInput = true;
+                } catch (NumberFormatException e) {
+                    new WarningException("Неверный формат даты").printMessage();
+                }
+            }
+        }catch (DateTimeParseException e){
+            new WarningException("Формат ввода даты: yyyy-MM-dd HH:mm").printMessage();
         }
         return value;
     }
 
-    public ZonedDateTime nextZonedDateTime(String inputText){
-//        System.out.println("Введите дату (yyyy-MM-dd HH:mm:ss am/pm +)");
+    public LocalDate nextLocalDate(){
         boolean wasInput = false;
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss VV");
-        ZonedDateTime value = null;
-//        while (!wasInput) {
-//            System.out.print(inputText);
-//            String inputValue = scanner.nextLine();
-            if (!inputText.isBlank()){
-                value = ZonedDateTime.parse(inputText, formatter);
-                wasInput = true;
+        String inputText = scanner.nextLine().trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        LocalDate value = null;
+        try {
+            while (!wasInput) {
+                try {
+                    if (!inputText.isBlank())
+                        value = LocalDate.parse(inputText, formatter);
+                    wasInput = true;
+                } catch (NumberFormatException e) {
+                    new WarningException("Неверный формат даты").printMessage();
+                }
             }
+        }catch (DateTimeParseException e){
+            new WarningException("Формат ввода даты: yyyy/MM/dd").printMessage();
+        }
         return value;
     }
 

@@ -1,39 +1,40 @@
 package allClasses.classInf;
 
-import allClasses.interaction.console.InputManager;
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
+
+import static java.lang.Math.abs;
 
 public class Worker {
-    private UUID id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private Person person;
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
     private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private double salary; //Значение поля должно быть больше 0
     private java.time.LocalDateTime startDate; //Поле не может быть null
+    private java.time.LocalDate birthday; //Поле не может быть null
     private Position position; //Поле может быть null
     private Status status; //Поле может быть null
     //private Person person; //Поле не может быть null
 
-    public Worker(String name, double salary, Position position, Status status, LocalDateTime startDate, ZonedDateTime birthday, Color eyeColor, long weight, Country nationality, Double x, Float y) {
+    public Worker(String name, double salary, Position position, Status status, LocalDateTime startDate, LocalDate birthday, Color eyeColor, long weight, Country nationality, Double x, Float y) {
         Person person = new Person(birthday, weight, eyeColor, nationality);
         Coordinates coordinates = new Coordinates(x, y);
         this.person = person;
         this.coordinates = coordinates;
-        this.id = java.util.UUID.randomUUID();
-        this.creationDate = ZonedDateTime.now();
+        this.id = Math.abs(java.util.UUID.randomUUID().getMostSignificantBits());
+        this.creationDate = ZonedDateTime.parse(ZonedDateTime.now().format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
         this.name = name;
         this.salary = salary;
         this.position = position;
         this.status = status;
         this.startDate = startDate;
-
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
@@ -89,7 +90,7 @@ public class Worker {
         this.person = person;
     }
 
-    public void setId(UUID id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -107,8 +108,8 @@ public class Worker {
 
     @Override
     public String toString() {
-        return "Worker" + "\n"+
-                "{" + "\n"+
+        return "Worker" + "\n" +
+                "{" + "\n" +
                 "\tid=" + id + "\n" +
                 "\t" + person + "\n" +
                 "\tname='" + name + "\'\n" +

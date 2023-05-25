@@ -4,11 +4,13 @@ import allClasses.classInf.Worker;
 
 import java.time.LocalDate;
 
+import java.util.Date;
 import java.util.LinkedHashSet;
 
 public class Collection {
     public static final LinkedHashSet<Worker> collection = new LinkedHashSet<>();
     public static final String type = "LinkedHashSet";
+    private static final Date initDate = new Date();
     public static void clear() {
         collection.clear();
     }
@@ -19,7 +21,9 @@ public class Collection {
     public static String getType() {
         return type;
     }
-    public static final String declareTime = String.valueOf(LocalDate.now());
+    public static Date getInitDate(){
+        return initDate;
+    }
 
     public static LinkedHashSet<Worker> getCollection() {
         return collection;

@@ -4,6 +4,7 @@ import allClasses.classInf.Color;
 import allClasses.classInf.Country;
 import allClasses.classInf.Position;
 import allClasses.classInf.Status;
+import exceptions.UnknownEnumException;
 
 public class EnumManager {
     private static final ScannerInput enumScanner = new ScannerInput();
@@ -17,7 +18,7 @@ public class EnumManager {
                 case (2) -> option = Color.GREEN;
                 case (3) -> option = Color.WHITE;
                 case (4) -> option = Color.YELLOW;
-                default -> {
+                default -> {new UnknownEnumException(4).printMessage();
                 }
             }
             ;
@@ -33,7 +34,7 @@ public class EnumManager {
                 case (2) -> option = Country.INDIA;
                 case (3) -> option = Country.ITALY;
                 case (4) -> option = Country.VATICAN;
-                default -> {
+                default -> {new UnknownEnumException(4).printMessage();
                 }
             }
             ;
@@ -49,7 +50,7 @@ public class EnumManager {
                 case (2) -> option = Position.COOK;
                 case (3) -> option = Position.ENGINEER;
                 case (4) -> option = Position.HEAD_OF_DIVISION;
-                default -> {
+                default -> {new UnknownEnumException(4).printMessage();
                 }
             }
             ;
@@ -60,11 +61,11 @@ public class EnumManager {
     public static Status statusChoose() {
         Status option = null;
         while (option == null) {
-            switch (InputManager.declareEnum(4, "status")) {
+            switch (InputManager.declareEnum(3, "status")) {
                 case (1) -> option = Status.FIRED;
                 case (2) -> option = Status.REGULAR;
                 case (3) -> option = Status.RECOMMENDED_FOR_PROMOTION;
-                default -> {
+                default -> {new UnknownEnumException(3).printMessage();
                 }
             }
             ;
